@@ -127,7 +127,7 @@ app.get("/getTotalDespesa", async (req, res) => {
         range: "DESPESAS DIARIAS!F2",  //para os dados serem retornados sem formatação
         dateTimeRenderOption: "FORMATTED_STRING", // para a data ser retornada com formatação
     })
-    res.send(getTotalDespesa.data)
+    res.send(getTotalDespesa.data[1])
 });
 
 app.get("/getTotalReceita", async (req, res) => {
