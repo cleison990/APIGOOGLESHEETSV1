@@ -65,7 +65,7 @@ app.post("/addRow", async (req, res) => {
     const row = await googleSheets.spreadsheets.values.append({
         auth,
         spreadsheetId,
-        range: "RECEITAS DIARIAS",
+        range: "RECEITAS DIARIAS!A2:Z1000",
         valueInputOption: "USER_ENTERED", //para os dados serem adicionados como está na planilha
         resource: {
             values: values,
