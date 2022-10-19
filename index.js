@@ -123,7 +123,7 @@ app.get("/getTotalDespesa", async (req, res) => {
     const getTotalDespesa = await googleSheets.spreadsheets.values.get({
         auth,
         spreadsheetId,
-        range: "DESPESAS DIARIAS!G2",  //para os dados serem retornados sem formatação
+        range: "DESPESAS DIARIAS!F2",  //para os dados serem retornados sem formatação
         dateTimeRenderOption: "FORMATTED_STRING", // para a data ser retornada com formatação
     })
     res.send(getTotalDespesa.data)
@@ -135,7 +135,7 @@ app.get("/getTotalReceita", async (req, res) => {
     const getTotalReceita = await googleSheets.spreadsheets.values.get({
         auth,
         spreadsheetId,
-        range: "RECEITAS DIARIAS!E2",  //para os dados serem retornados sem formatação
+        range: "RECEITAS DIARIAS!F2",  //para os dados serem retornados sem formatação
         dateTimeRenderOption: "FORMATTED_STRING", // para a data ser retornada com formatação
     })
     res.send(getTotalReceita.data)
