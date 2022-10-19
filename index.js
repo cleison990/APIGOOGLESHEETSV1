@@ -99,7 +99,8 @@ app.get("/getAverageReceita", async (req, res) => {
     const getAverageReceita = await googleSheets.spreadsheets.values.get({
         auth,
         spreadsheetId,
-        range: "RECEITAS DIARIAS!E2",  //para os dados serem retornados sem formatação
+        range: "RECEITAS DIARIAS!E2",
+        valueRenderOption: "UNFORMATTED_VALUE",   //para os dados serem retornados sem formatação
         dateTimeRenderOption: "FORMATTED_STRING", // para a data ser retornada com formatação
     })
     res.send(getAverageReceita.data)
