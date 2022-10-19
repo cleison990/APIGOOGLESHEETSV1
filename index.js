@@ -57,34 +57,89 @@ app.get("/getRows", async (req, res) => {
     res.send(getRows.data)
 });
 
-app.post("/addRow", async (req, res) => {
+app.post("/addReceita", async (req, res) => {
     const { googleSheets, auth, spreadsheetId } = await getAuthSheets();
 
     const { values } = req.body;
 
-    const row = await googleSheets.spreadsheets.values.append({
+    const receita = await googleSheets.spreadsheets.values.append({
         auth,
         spreadsheetId,
-        range: "RECEITAS DIARIAS!A2:Z1000",
+        range: "RECEITAS DIARIAS!A:B",
         valueInputOption: "USER_ENTERED", //para os dados serem adicionados como está na planilha
         resource: {
             values: values,
         },
     });
 
-    res.send(row.data);
+    res.send(receita.data);
 });
 
-app.get("/getAverage", async (req, res) => {
+app.post("/addDespesa", async (req, res) => {
     const { googleSheets, auth, spreadsheetId } = await getAuthSheets();
 
-    const getAverage = await googleSheets.spreadsheets.values.get({
+    const { values } = req.body;
+
+    const despesa = await googleSheets.spreadsheets.values.append({
+        auth,
+        spreadsheetId,
+        range: "DESPESAS DIARIAS!A:B",
+        valueInputOption: "USER_ENTERED", //para os dados serem adicionados como está na planilha
+        resource: {
+            values: values,
+        },
+    });
+
+    res.send(despesa.data);
+});
+
+app.get("/getAverageReceita", async (req, res) => {
+    const { googleSheets, auth, spreadsheetId } = await getAuthSheets();
+
+    const getAverageReceita = await googleSheets.spreadsheets.values.get({
         auth,
         spreadsheetId,
         range: "RECEITAS DIARIAS!E2",  //para os dados serem retornados sem formatação
         dateTimeRenderOption: "FORMATTED_STRING", // para a data ser retornada com formatação
     })
-    res.send(getAverage.data)
+    res.send(getAverageReceita.data)
 });
+
+app.get("/getAverageDespesa", async (req, res) => {
+    const { googleSheets, auth, spreadsheetId } = await getAuthSheets();
+
+    const getAverageDespesa = await googleSheets.spreadsheets.values.get({
+        auth,
+        spreadsheetId,
+        range: "DESPESAS DIARIAS!E2",  //para os dados serem retornados sem formatação
+        dateTimeRenderOption: "FORMATTED_STRING", // para a data ser retornada com formatação
+    })
+    res.send(getAverageDespesa.data)
+});
+
+app.get("/getTotalDespesa", async (req, res) => {
+    const { googleSheets, auth, spreadsheetId } = await getAuthSheets();
+
+    const getTotalDespesa = await googleSheets.spreadsheets.values.get({
+        auth,
+        spreadsheetId,
+        range: "DESPESAS DIARIAS!G2",  //para os dados serem retornados sem formatação
+        dateTimeRenderOption: "FORMATTED_STRING", // para a data ser retornada com formatação
+    })
+    res.send(getTotalDespesa.data)
+});
+
+app.get("/getTotalReceita", async (req, res) => {
+    const { googleSheets, auth, spreadsheetId } = await getAuthSheets();
+
+    const getTotalReceita = await googleSheets.spreadsheets.values.get({
+        auth,
+        spreadsheetId,
+        range: "RECEITAS DIARIAS!E2",  //para os dados serem retornados sem formatação
+        dateTimeRenderOption: "FORMATTED_STRING", // para a data ser retornada com formatação
+    })
+    res.send(getTotalReceita.data)
+});
+
 
 app.listen(port, () => console.log("rodando na porta 3001"))
