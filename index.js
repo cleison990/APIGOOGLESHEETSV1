@@ -102,7 +102,7 @@ app.get("/getAverageReceita", async (req, res) => {
         range: "RECEITAS DIARIAS!E2",  //para os dados serem retornados sem formatação
         dateTimeRenderOption: "FORMATTED_STRING", // para a data ser retornada com formatação
     })
-    res.send(getAverageReceita.data)
+    res.send(getAverageReceita.data.values)
 });
 
 app.get("/getAverageDespesa", async (req, res) => {
