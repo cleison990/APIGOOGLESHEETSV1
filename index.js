@@ -102,7 +102,7 @@ app.get("/getAverageReceita", async (req, res) => {
         range: "RECEITAS DIARIAS!E2",  //para os dados serem retornados sem formatação
         dateTimeRenderOption: "FORMATTED_STRING", // para a data ser retornada com formatação
     })
-    res.send(getAverageReceita.data.values)
+    res.send(getAverageReceita.data)
 });
 
 app.get("/getAverageDespesa", async (req, res) => {
@@ -111,11 +111,10 @@ app.get("/getAverageDespesa", async (req, res) => {
     const getAverageDespesa = await googleSheets.spreadsheets.values.get({
         auth,
         spreadsheetId,
-        range: "DESPESAS DIARIAS!E2",
-        valueRenderOption: "UNFORMATTED_VALUE", //para os dados serem retornados sem formatação
+        range: "DESPESAS DIARIAS!E2",  //para os dados serem retornados sem formatação
         dateTimeRenderOption: "FORMATTED_STRING", // para a data ser retornada com formatação
     })
-    res.send(getAverageDespesa.data.values)
+    res.send(getAverageDespesa.data[1])
 });
 
 app.get("/getTotalDespesa", async (req, res) => {
@@ -127,7 +126,7 @@ app.get("/getTotalDespesa", async (req, res) => {
         range: "DESPESAS DIARIAS!F2",  //para os dados serem retornados sem formatação
         dateTimeRenderOption: "FORMATTED_STRING", // para a data ser retornada com formatação
     })
-    res.send(getTotalDespesa.data[1])
+    res.send(getTotalDespesa.data)
 });
 
 app.get("/getTotalReceita", async (req, res) => {
