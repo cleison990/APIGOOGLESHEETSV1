@@ -4,6 +4,7 @@ const cli = require("nodemon/lib/cli");
 
 
 const app = express();
+const port = process.env.PORT || 3000
 
 app.use(express.json())
 
@@ -86,4 +87,4 @@ app.get("/getAverage", async (req, res) => {
     res.send(getAverage.data)
 });
 
-app.listen(3001, () => console.log("rodando na porta 3001"))
+app.listen(port, () => console.log("rodando na porta 3001"))
